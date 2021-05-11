@@ -9,7 +9,7 @@ jobs:
           name: Run tests
           command:  |
               set -x
-              docker-compose up --abort-on-container-exit
+              docker-compose -f DockerCompose.yml up -d
 workflows:
   main:
     jobs:
