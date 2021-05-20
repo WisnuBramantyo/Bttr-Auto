@@ -13,23 +13,23 @@ services:
     volumes:
       - /path/to/host/folder:/var/testproject/agent
     environment:
-      TP_JOB_ID: "REPLACE_WITH_YOUR_JOB_ID"
-      TP_JOB_PARAMS: '"jobParameters" : { "browsers" : ["Chrome","FireFox"], "testParameters": [{ "data": [{ "ApplicationURL": "https://example.testproject.io/web", "FirstName": "John", "LastName": "Travolta"}]}]}'
+      TP_AGENT_TEMP: "true"
+      TP_API_KEY: "tAkMb57xTZkbfO1NRM8ny0pMOcsR6YeukacGjB1KlMU1"
+      TP_JOB_ID: "y5mOxGLfrUCbtHbJKMFeFQ"
+      TP_JOB_PARAMS: '"jobParameters" : { "browsers" : ["Chrome","FireFox"]}'
       CHROME: "chrome:4444"
       FIREFOX: "firefox:4444"
-    secrets:
-      - tp_agent
+    ports:
+      - "8888:8589"
+    # secrets:
+    #   - tp_agent
   chrome:
     image: selenium/standalone-chrome
     volumes:
       - /dev/shm:/dev/shm
-    ports:
-      - "4444:4444"
+    # ports:
+    #   - "4444:4444"
   firefox:
     image: selenium/standalone-firefox
     volumes:
       - /dev/shm:/dev/shm
-
-secrets:
-   tp_agent:
-     file: /path/to/secrets.txt
