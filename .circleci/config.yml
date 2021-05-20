@@ -1,16 +1,19 @@
 version: 2.1
+orbs:
+  python: circleci/python@0.2.1
 jobs:
-  run-recorded-tests:
-    machine:
-      image: ubuntu-2004:202010-01
+  build-env:
+    executor: python/default
     steps:
       - checkout
-      - run:
-          name: Run tests
-          command:  |
-              set -x
-              docker-compose -f DockerCompose.yml up -d
+  run-recorded-tests:
+    executor: python/default
+    steps:
+     - run:
+          command: curl -X POST "Request URL"  -H "accept:application/json"  -H "Authorization:YOUR API KEY" -H "Content-Type:application/json" -d
+          name: Run Test On Build
 workflows:
   main:
     jobs:
+      - build-env
       - run-recorded-tests
